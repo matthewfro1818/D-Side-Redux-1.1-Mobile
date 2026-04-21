@@ -69,7 +69,15 @@ class MathUtil
 	/**
 		FlxMath.lerp but accounts for FPS.
 	**/
-	public static inline function fpsLerp(v1:Float, v2:Float, ratio:Float) return FlxMath.lerp(v1, v2, FlxMath.getElapsedLerp(ratio, FlxG.elapsed));
+	public static inline function fpsLerp(v1:Float, v2:Float, ratio:Float) return FlxMath.lerp(v1, v2, computeElapsedLerp(ratio, FlxG.elapsed));
+	
+	/**
+	 * Compute elapsed lerp (frame-independent lerp factor)
+	 */
+	public static inline function computeElapsedLerp(decay:Float, elapsed:Float):Float
+	{
+		return 1.0 - Math.pow(2.0, -decay * elapsed);
+	}
 	
 	/**
 	 * referenced via https://youtu.be/LSNQuFEDOyQ

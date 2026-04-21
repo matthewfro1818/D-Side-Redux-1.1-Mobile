@@ -10,6 +10,8 @@ import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
 
+import funkin.utils.MathUtil;
+
 /**
  * Loosley based on FlxTypeText lolol
  */
@@ -379,7 +381,7 @@ class Alphabet extends FlxSpriteGroup
 		{
 			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
 			
-			final lerpRate = FlxMath.getElapsedLerp(0.16, elapsed);
+			final lerpRate = MathUtil.computeElapsedLerp(0.16, elapsed);
 			
 			if (changeAxis.y) y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpRate);
 			if (forceX != Math.NEGATIVE_INFINITY)
