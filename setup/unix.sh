@@ -35,7 +35,8 @@ haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cd
 haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
 haxelib git lime https://github.com/matthewfro18/lime
 haxelib git flixel https://github.com/HaxeFlixel/flixel
-haxelib install flixel-addons
+haxelib install flixel-addons 3.3.0
+haxelib set flixel-addons 3.3.0
 haxelib install format
 haxelib install hxp
 haxelib install hashlink
