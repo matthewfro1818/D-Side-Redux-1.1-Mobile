@@ -9,10 +9,10 @@ on:
       os:
         required: true
         type: string
-      setupCommand:
+      buildArgs:
         required: true
         type: string
-      buildArgs:
+      setupCommand:
         required: true
         type: string
       artifactName:
@@ -22,69 +22,36 @@ on:
         required: true
         type: string
 
-env:
-  HAXE_VERSION: 4.3.7
-  PROJECT_NAME: KathyEngine
-
 jobs:
   build:
-    name: Build
     runs-on: ${{ inputs.os }}
+
     steps:
       - name: Checkout
-        uses: actions/checkout@main
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
       - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
+        uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: ${{ env.HAXE_VERSION }}
+          haxe-version: 4.3.3
 
-      - name: Setup Android NDK
-        if: inputs.name == 'Android'
-        id: setup-ndk
-        uses: nttld/setup-ndk@main
-        with:
-          ndk-version: r27d
-          add-to-path: false
+      - name: Make setup script executable (Unix only)
+        if: runner.os != 'Windows'
+        run: chmod +x ./setup/unix.sh
 
-      - name: Install libVLC
-        if: contains(inputs.name, 'Linux')
-        run: sudo apt install libvlc-dev libvlccore-dev
-
-      - name: Install Libraries
+      - name: Run setup script
         run: ${{ inputs.setupCommand }}
 
-      - name: Configure Android
-        if: inputs.name == 'Android'
+      - name: Install HashLink (Unix only)
+        if: runner.os != 'Windows'
         run: |
-          haxelib run lime config ANDROID_SDK $ANDROID_HOME
-          haxelib run lime config ANDROID_NDK_ROOT ${{ steps.setup-ndk.outputs.ndk-path }}
-          haxelib run lime config JAVA_HOME $JAVA_HOME_17_arm64
-          haxelib run lime config ANDROID_SETUP true
-
-      - name: Install HashLink
-        run: |
-          haxelib git hashlink https://github.com/HaxeFoundation/hashlink
+          haxelib install hashlink
 
       - name: Compile
         run: haxelib run lime build ${{ inputs.buildArgs }}
 
-      - name: Make IPA
-        if: inputs.name == 'iOS'
-        run: |
-          brew install ldid
-          cd export/release/ios/build/Release-iphoneos/${{ env.PROJECT_NAME }}.app
-          ldid -S../../../${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.entitlements ${{ env.PROJECT_NAME }}
-          cd ..
-          mkdir Payload
-          mv ${{ env.PROJECT_NAME }}.app Payload
-          zip -r ${{ env.PROJECT_NAME }}.ipa Payload
-
       - name: Upload Artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifactName }}
           path: ${{ inputs.artifactPath }}
-          if-no-files-found: error
