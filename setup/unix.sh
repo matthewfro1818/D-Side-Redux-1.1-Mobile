@@ -38,4 +38,5 @@ haxelib git flixel https://github.com/HaxeFlixel/flixel
 haxelib install flixel-addons
 haxelib install format
 haxelib install hxp
+haxelib install hashlink
 echo Finished!
