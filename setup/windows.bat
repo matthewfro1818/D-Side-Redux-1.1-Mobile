@@ -13,7 +13,7 @@ haxelib install hxdiscord_rpc 1.2.4
 haxelib install hxvlc 2.0.1 --skip-dependencies
 haxelib install lime 8.1.2
 haxelib install openfl 9.3.3
-haxelib inatall hscript 2.6.0
+haxelib install hscript 2.6.0
 haxelib install hxcpp
 haxelib install hxcpp-debug-server 1.2.4
 haxelib install hxdiscord_rpc 1.2.4
