@@ -6,8 +6,8 @@ permissions:
   discussions: write
 
 env:
-  PROJECT_NAME: KathyEngine
-  REPO_PATH: kittycathy114/FNF-KathyEngine
+  PROJECT_NAME: D-Side-Redux-1.1-Mobile
+  REPO_PATH: matthewfro1818/D-Side-Redux-1.1-Mobile
 
 jobs:
   get-commit-hash:
