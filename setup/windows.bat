@@ -9,6 +9,7 @@ haxelib install lime 8.2.2
 haxelib install openfl 9.4.0
 haxelib install flixel 5.7.0
 haxelib install flixel-addons 3.4.0
+haxelib set flixel-addons 3.4.0
 haxelib install flixel-tools
 haxelib install flixel-ui
 
