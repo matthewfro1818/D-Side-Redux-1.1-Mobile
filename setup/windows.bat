@@ -20,6 +20,7 @@ haxelib install json2object
 haxelib install json5hx
 haxelib install hxp
 haxelib install format
+haxelib install moonchart
 
 :: Native libs
 haxelib install hxcpp
@@ -29,11 +30,13 @@ haxelib install hxvlc
 haxelib install hashlink
 
 :: Git-based libs
+haxelib git hscript-iris https://github.com/pisayesiwsi/hscript-iris.git dev
 haxelib git flixel-animate https://github.com/MaybeMaru/flixel-animate.git
 haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate.git
 haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git
 haxelib git funkin.vis https://github.com/FunkinCrew/funkVis.git
 haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git
+haxelib git extension-androidtools https://github.com/LimeExtensions/extension-androidtools.git
 
 :: HaxeUI (matching versions)
 haxelib git haxeui-core https://github.com/haxeui/haxeui-core.git
