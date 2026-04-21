@@ -1,6 +1,6 @@
 name: Main
 
-on:  # Triggers the workflow on push or pull request events but only for the master branch
+on:
   push:
     branches: [ main, experimental ]
   pull_request:
@@ -8,8 +8,7 @@ on:  # Triggers the workflow on push or pull request events but only for the mas
   workflow_dispatch:
 
 jobs:
-  Build:
-    name: ${{ matrix.name }}
+  build:
     strategy:
       matrix:
         include:
@@ -18,36 +17,41 @@ jobs:
             buildArgs: windows
             setupCommand: ".\\setup\\windows.bat"
             artifactName: windowsBuild-x86_64
-            artifactPath: export\release\windows\bin\*
+            artifactPath: export/release/windows/bin/*
+
           - name: Linux
             os: ubuntu-22.04
             buildArgs: linux
             setupCommand: sh ./setup/unix.sh
             artifactName: linuxBuild-x86_64
             artifactPath: export/release/linux/bin/*
+
           - name: macOS x86_64
             os: macos-15
-            setupCommand: sh ./setup/unix.sh
             buildArgs: "mac -64 -D HXCPP_M64"
+            setupCommand: sh ./setup/unix.sh
             artifactName: macOSBuild-x86_64
             artifactPath: export/release/macos/bin/*
+
           - name: macOS ARM64
             os: macos-15
-            setupCommand: sh ./setup/unix.sh
             buildArgs: "mac -arm64 -D HXCPP_ARM64"
+            setupCommand: sh ./setup/unix.sh
             artifactName: macOSBuild-arm64
             artifactPath: export/release/macos/bin/*
+
           - name: iOS
             os: macos-15
             buildArgs: "ios -nosign"
             setupCommand: sh ./setup/unix.sh
             artifactName: iOSBuild
-            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
+            artifactPath: export/release/ios/build/Release-iphoneos/*.ipa
+
     uses: ./.github/workflows/build.yml
     with:
-        name: ${{ matrix.name }}
-        os: ${{ matrix.os }}
-        buildArgs: ${{ matrix.buildArgs }}
-        setupCommand: ${{ matrix.setupCommand }}
-        artifactName: ${{ matrix.artifactName }}
-        artifactPath: ${{ matrix.artifactPath }}
+      name: ${{ matrix.name }}
+      os: ${{ matrix.os }}
+      buildArgs: ${{ matrix.buildArgs }}
+      setupCommand: ${{ matrix.setupCommand }}
+      artifactName: ${{ matrix.artifactName }}
+      artifactPath: ${{ matrix.artifactPath }}
