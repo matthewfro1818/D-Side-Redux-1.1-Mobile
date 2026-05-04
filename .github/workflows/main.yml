@@ -46,7 +46,6 @@ jobs:
           haxelib list
       - name: Compile hxcpp
         run: |
-          cd ~/haxelib/hxcpp/git/tools/run
           haxe compile.hxml
           cd ..
           cd ./hxcpp
@@ -81,7 +80,6 @@ jobs:
         shell: cmd
       - name: Compile hxcpp
         run: |
-          cd C:/haxelib/hxcpp/git/tools/run
           haxe compile.hxml
           cd ..
           cd ./hxcpp
@@ -114,7 +112,6 @@ jobs:
           hxpkg install
       - name: Compile hxcpp
         run: |
-          cd ~/haxelib/hxcpp/git/tools/run
           haxe compile.hxml
           cd ..
           cd ./hxcpp
@@ -149,7 +146,6 @@ jobs:
           hxpkg install
       - name: Compile hxcpp
         run: |
-          cd ~/haxelib/hxcpp/git/tools/run
           haxe compile.hxml
           cd ..
           cd ./hxcpp
