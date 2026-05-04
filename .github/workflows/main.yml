@@ -93,7 +93,7 @@ jobs:
           name: windowsBuild
           path: export/release/windows/bin
   buildMacIntel:
-    runs-on: macos-15
+    runs-on: macos-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -127,7 +127,7 @@ jobs:
           path: export/release/macos/bin
 
   buildMacArm:
-    runs-on: macos-15
+    runs-on: macos-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -188,7 +188,7 @@ jobs:
           name: androidBuild
           path: export/release/android/bin/app/build/outputs/apk/release/*.apk
   buildIOS:
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@main
 
